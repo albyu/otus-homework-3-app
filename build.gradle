@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.4.2'
+    id 'org.springframework.boot' version '2.6.3'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group 'org.example'
@@ -12,25 +13,35 @@ repositories {
 
 final String LOG4J_VERSION = "2.17.0"
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:2.6.3"
+    }
+}
+
 dependencies {
-    implementation 'org.projectlombok:lombok:1.18.16'
+    implementation 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok'
     //testCompile group: 'junit', name: 'junit', version: '4.12'
-    implementation 'org.springframework.boot:spring-boot:2.4.2'
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.4.2'
-    implementation 'org.springframework.boot:spring-boot-starter-json:2.4.2'
+    implementation 'org.springframework.boot:spring-boot'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-json'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.postgresql:postgresql:42.6.0'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation 'io.micrometer:micrometer-core'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
 
     implementation "org.apache.logging.log4j:log4j-core:${LOG4J_VERSION}"
-    compile group: 'ch.qos.logback', name: 'logback-classic', version: "1.2.3"
-    compile group: 'ch.qos.logback', name: 'logback-core', version: "1.2.3"
-    compile group: 'net.logstash.logback', name:'logstash-logback-encoder', version:"6.6"
-    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: "2.4.15"
-
-
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+    implementation "ch.qos.logback:logback-core:1.2.3"
+    //implementation "net.logstash.logback:logstash-logback-encoder:1.2.3"
 }
+
+
 
 bootJar {
     archiveBaseName = 'otus-homework'
